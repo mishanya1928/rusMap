@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        let district = null;
+        let region = null;
+        $(document).ready(function(){
+            $('#district path').on('click', function(){
+                district = $(this).attr('id')
+                $('#district').hide();
+                $('#region').show();
+                getSelected()
+            })
+            $('#region path, #region polygon').on('click', function(){
+                region = $(this).data('code')
+                getSelected()
+            })
+        })
+        function getSelected(){
+            let result = '';
+            if(district)
+                result = result + "<p>Выбран округ: <b>" + district + "</b></p>";
+            if(region)
+                result = result + "<p>Выбран регион: <b>" + region + "</b></p>";
+            $('.result').html(result);
+        }
+    </script>
+
+</head>
+<body>
+<div class="rf-map">
+    <div class="result"></div>
+    <svg viewBox="" width="100%" height="100%">
+        <use xlink:href="/Russia_n.svg"/>
+    </svg>
+    <div class="district-links"></div>
+</div>
+</body>
+</html>
